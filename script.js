@@ -6,6 +6,7 @@ function Book(title, author, id){
     this.id = id;
 }
 
+
 function addBookToLibrary(title, author){
     //create a book based on arguments
     let uuid = crypto.randomUUID();
@@ -29,10 +30,10 @@ function displayBook(book){
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
     bookCard.id = book.id;
+
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCardSection.appendChild(bookCard);
-
 }
 
 function displayLibrary(){
@@ -68,6 +69,7 @@ form.addEventListener('submit', (e) => {
     addBookToLibrary(title, author);
     form.reset();
 })
+
 
 // On browser load
 displayLibrary();
