@@ -4,7 +4,14 @@ function Book(title, author, id){
     this.title = title;
     this.author = author;
     this.id = id;
+
+    const card = document.createElement('div');
+    card.dataset.id = id;
+
+    this.card = card;
 }
+
+const bookCardSection = document.getElementById('book-card-section');
 
 function addBookToLibrary(title, author){
     //create a book based on arguments
@@ -16,23 +23,20 @@ function addBookToLibrary(title, author){
     myLibrary.push(newBook);
 
     //update display after book has been added
-    displayBook(newBook);
+    updateBookCardInfo(newBook);
+    bookCardSection.appendChild(newBook.card);
 }
 
-const bookCardSection = document.getElementById('book-card-section');
 
-function displayBook(book){
-    const bookCard = document.createElement('div');
+function updateBookCardInfo(book){
     const bookTitle = document.createElement('p');
     const bookAuthor = document.createElement('p');
 
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
-    bookCard.id = book.id;
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookAuthor);
-    bookCardSection.appendChild(bookCard);
 
+    book.card.appendChild(bookTitle);
+    book.card.appendChild(bookAuthor);
 }
 
 function displayLibrary(){
