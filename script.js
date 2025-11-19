@@ -7,8 +7,8 @@ function Book(title, author, id){
     this.isRead = false;
 }
 
-Book.prototype.isRead = function(){
-    (this.isRead == true) ? this.isRead = false : this.isRead = true
+Book.prototype.toggleReadStatus = function(){
+    (this.isRead) ? this.isRead = false : this.isRead = true;
 };
 
 const bookCardSection = document.getElementById('book-card-section');
@@ -36,36 +36,38 @@ function displayBook(book){
 
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
+    readStatus.textContent = book.isRead ? 'Read' : 'Unread';
     bookCard.id = book.id;
+
     removeButton.textContent = 'Remove';
     isReadButton.textContent = 'Read';
 
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookAuthor);
-    bookCard.appendChild(removeButton);
-    bookCard.appendChild(isReadButton);
+    bookCard.append(bookTitle, bookAuthor, readStatus, removeButton, isReadButton);
     bookCardSection.appendChild(bookCard);
 
-    removeButton.addEventListener('click', () => {
-        bookCard.remove();
-        let i = myLibrary.findIndex((el) => el.id == book.id)
+
+    removeButton.addEventListener('click', () => {        
+        // LOGIC
+        const i = myLibrary.findIndex((el) => el.id == book.id)
         myLibrary.splice(i,1);
+
+        // DOM
+        displayLibrary();
     });
 
     isReadButton.addEventListener('click', () => {
-        book.isRead;
-        readStatus.textContent = "I read this!";
-        bookCard.appendChild(readStatus);
-        isReadButton.remove();
+        // LOGIC
+        book.toggleReadStatus();
+
+        // DOM
+        readStatus.textContent = (!book.isRead) ? 'Unread' : 'Read';
+        isReadButton.textContent = (!book.isRead) ? 'Read' : 'Unread';
     })
 }
 
 function displayLibrary(){
     bookCardSection.innerHTML = '';
-
-    myLibrary.forEach((el) => {
-        displayBook(el);
-    });
+    myLibrary.forEach(displayBook);
 }
 
 const addNewBookButton = document.getElementById('add-new-book-btn');
@@ -73,7 +75,7 @@ const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
 
 
-addNewBookButton.addEventListener("click", () => dialog.show());
+addNewBookButton.addEventListener("click", () => dialog.showModal());
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
