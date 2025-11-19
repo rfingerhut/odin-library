@@ -4,7 +4,12 @@ function Book(title, author, id){
     this.title = title;
     this.author = author;
     this.id = id;
+    this.isRead = false;
 }
+
+Book.prototype.isRead = function(){
+    (this.isRead == true) ? this.isRead = false : this.isRead = true
+};
 
 const bookCardSection = document.getElementById('book-card-section');
 
@@ -25,17 +30,34 @@ function displayBook(book){
     const bookCard = document.createElement('div');
     const bookTitle = document.createElement('p');
     const bookAuthor = document.createElement('p');
+    const readStatus = document.createElement('p');
     const removeButton = document.createElement('button');
+    const isReadButton = document.createElement('button');
 
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
     bookCard.id = book.id;
     removeButton.textContent = 'Remove';
+    isReadButton.textContent = 'Read';
 
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(removeButton);
+    bookCard.appendChild(isReadButton);
     bookCardSection.appendChild(bookCard);
+
+    removeButton.addEventListener('click', () => {
+        bookCard.remove();
+        let i = myLibrary.findIndex((el) => el.id == book.id)
+        myLibrary.splice(i,1);
+    });
+
+    isReadButton.addEventListener('click', () => {
+        book.isRead;
+        readStatus.textContent = "I read this!";
+        bookCard.appendChild(readStatus);
+        isReadButton.remove();
+    })
 }
 
 function displayLibrary(){
