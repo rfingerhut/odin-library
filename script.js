@@ -12,7 +12,6 @@ Book.prototype.toggleReadStatus = function(){
 };
 
 const bookCardSection = document.getElementById('book-card-section');
-bookCardSection.classList.add('book-card-section');
 
 function addBookToLibrary(title, author){
     //create a book based on arguments
