@@ -1,0 +1,108 @@
+*{
+    font-family: 'Roboto';
+}
+
+p{
+    padding: 0;
+    margin: 0;
+}
+
+.main-container{
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: 'side-bar book-card-section';
+    grid-template-rows: auto;
+}
+
+.side-bar{
+    grid-area: 'side-bar';
+    border: 1px solid blue;
+}
+
+.form-container{
+    grid-area: 'form-container';
+    border: 1px solid green;
+}
+
+dialog{
+    border: none;
+    border-radius: 10px;
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form{
+    width: 100%;
+    margin: 1rem 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+input{
+    margin-bottom: 1.5rem;
+    height: 2rem;
+
+    outline: none;
+    border: 1px solid rgb(214, 214, 214);
+
+    padding-left: 1rem;
+    font-size: 1rem;
+
+    background: #f3f3f3;
+}
+
+input:focus{
+    box-shadow: 0 0 0 2px #3b82f6;
+}
+
+#submit-book, input{
+    border-radius: 30px;
+    height: 3rem;
+}
+
+#submit-book{
+    border: none;
+    display: flex;
+
+    margin: 1rem auto;
+    padding: 0.7rem 2rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: #3b82f6;
+    color: white;
+}
+
+#submit-book:hover{
+    transform: scale(1.03);
+    transition: 0.1s ease;
+}
+
+#submit-book{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+label{
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+
+.book-card-section{
+    border: 1px solid black;
+        grid-area: 'grid-area';
+
+}
+
+.book-card{
+    border: 1px solid red;
+}
