@@ -12,6 +12,7 @@ Book.prototype.toggleReadStatus = function(){
 };
 
 const bookCardSection = document.getElementById('book-card-section');
+bookCardSection.classList.add('book-card-section');
 
 function addBookToLibrary(title, author){
     //create a book based on arguments
@@ -28,19 +29,30 @@ function addBookToLibrary(title, author){
 
 function displayBook(book){
     const bookCard = document.createElement('div');
-    const bookTitle = document.createElement('p');
-    const bookAuthor = document.createElement('p');
-    const readStatus = document.createElement('p');
-    const removeButton = document.createElement('button');
-    const isReadButton = document.createElement('button');
+    bookCard.classList.add('book-card');
 
+    const bookTitle = document.createElement('p');
     bookTitle.textContent = book.title;
+    bookTitle.classList.add('book-title');
+
+    const bookAuthor = document.createElement('p');
     bookAuthor.textContent = book.author;
+    bookAuthor.classList.add('book-author');
+
+    const readStatus = document.createElement('p');
     readStatus.textContent = book.isRead ? 'Read' : 'Unread';
+    readStatus.classList.add('read-status');
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.classList.add('remove-button');
+
+    const isReadButton = document.createElement('button');
+    isReadButton.textContent = 'Read';
+    isReadButton.classList.add('is-read-button');
+
     bookCard.id = book.id;
 
-    removeButton.textContent = 'Remove';
-    isReadButton.textContent = 'Read';
 
     bookCard.append(bookTitle, bookAuthor, readStatus, removeButton, isReadButton);
     bookCardSection.appendChild(bookCard);
