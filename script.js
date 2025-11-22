@@ -43,6 +43,8 @@ function addBookToLibrary(title, author){
 function displayBook(book){
     const bookCard = document.createElement('div');
     bookCard.classList.add('book-card');
+    const bookInfoContainer = document.createElement('div');
+    bookInfoContainer.classList.add('book-info-container')
 
     const bookTitle = document.createElement('p');
     bookTitle.textContent = book.title;
@@ -56,14 +58,19 @@ function displayBook(book){
     removeButton.textContent = 'x';
     removeButton.classList.add('remove-button');
 
+    bookInfoContainer.append(bookTitle, bookAuthor);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
     const isReadButton = document.createElement('button');
     isReadButton.textContent = 'Unread';
     isReadButton.classList.add('is-read-button');
+    buttonContainer.appendChild(isReadButton);
 
     bookCard.id = book.id;
 
 
-    bookCard.append(bookTitle, bookAuthor, removeButton, isReadButton);
+    bookCard.append(bookInfoContainer, removeButton, buttonContainer);
     bookCardSection.appendChild(bookCard);
 
 
