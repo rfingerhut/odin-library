@@ -192,6 +192,7 @@ label{
     padding: 2rem;
     position:relative;
     display: flex;
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
 }
@@ -203,12 +204,24 @@ label{
 .book-info-container{
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 2rem;
+    row-gap: 0.25rem;
     overflow-wrap: anywhere;
+    max-height: 7rem;
 }
 
 .book-author, .book-title{
     margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.book-title{
+    max-height: 5rem;
+    overflow-y: auto;
+}
+
+.book-author{
+    max-height: 2rem;
+    overflow-y: auto;
 }
 
 
