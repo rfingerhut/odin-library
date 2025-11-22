@@ -1,4 +1,6 @@
 const myLibrary = [];
+let total = myLibrary.length;
+let numBooksRead = 0;
 
 function Book(title, author, id){
     this.title = title;
@@ -9,6 +11,7 @@ function Book(title, author, id){
 
 Book.prototype.toggleReadStatus = function(){
     (this.isRead) ? this.isRead = false : this.isRead = true;
+    numBooksRead++;
 };
 
 const bookCardSection = document.getElementById('book-card-section');
@@ -38,12 +41,8 @@ function displayBook(book){
     bookAuthor.textContent = book.author;
     bookAuthor.classList.add('book-author');
 
-    const readStatus = document.createElement('p');
-    readStatus.textContent = book.isRead ? 'Read' : 'Unread';
-    readStatus.classList.add('read-status');
-
     const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
+    removeButton.textContent = 'x';
     removeButton.classList.add('remove-button');
 
     const isReadButton = document.createElement('button');
@@ -53,7 +52,7 @@ function displayBook(book){
     bookCard.id = book.id;
 
 
-    bookCard.append(bookTitle, bookAuthor, readStatus, removeButton, isReadButton);
+    bookCard.append(bookTitle, bookAuthor, removeButton, isReadButton);
     bookCardSection.appendChild(bookCard);
 
 
@@ -70,8 +69,6 @@ function displayBook(book){
         // LOGIC
         book.toggleReadStatus();
 
-        // DOM
-        readStatus.textContent = (!book.isRead) ? 'Unread' : 'Read';
         isReadButton.textContent = (!book.isRead) ? 'Read' : 'Unread';
     })
 }
