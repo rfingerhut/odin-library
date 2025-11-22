@@ -10,9 +10,20 @@ function Book(title, author, id){
 }
 
 Book.prototype.toggleReadStatus = function(){
-    (this.isRead) ? this.isRead = false : this.isRead = true;
-    numBooksRead++;
+    if(this.isRead){
+        this.isRead = false;
+        numBooksRead--;
+    } else{
+        this.isRead = true;
+        numBooksRead++;
+    }
+    updateProgressBar();
 };
+
+const booksRead = document.getElementById('num-books-read');
+function updateProgressBar(){
+    booksRead.textContent = `${numBooksRead}`;
+}
 
 const bookCardSection = document.getElementById('book-card-section');
 
@@ -46,7 +57,7 @@ function displayBook(book){
     removeButton.classList.add('remove-button');
 
     const isReadButton = document.createElement('button');
-    isReadButton.textContent = 'Read';
+    isReadButton.textContent = 'Unread';
     isReadButton.classList.add('is-read-button');
 
     bookCard.id = book.id;
@@ -69,7 +80,7 @@ function displayBook(book){
         // LOGIC
         book.toggleReadStatus();
 
-        isReadButton.textContent = (!book.isRead) ? 'Read' : 'Unread';
+        isReadButton.textContent = (!book.isRead) ? 'Unread' : 'Read';
     })
 }
 
