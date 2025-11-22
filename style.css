@@ -184,11 +184,12 @@ label{
 .book-card{
     border: none;
     border-left: 10px solid black;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    height: min-content;
+
+    height: minmax(100%, min-content);
     padding: 2rem;
+
     position:relative;
     display: flex;
     flex-direction: column;
