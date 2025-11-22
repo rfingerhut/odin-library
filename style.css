@@ -176,9 +176,11 @@ label{
     margin: 0;
     padding: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, 300px);
+    align-items: stretch;
     gap: 1rem;
+    overflow-y: scroll;
 }
 
 .book-card{
@@ -187,13 +189,26 @@ label{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 
-    height: minmax(100%, min-content);
     padding: 2rem;
-
     position:relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.button-container{
+    flex: 1;
+}
+
+.book-info-container{
+    display: flex;
+    flex-direction:column;
+    overflow-wrap: anywhere;
+    flex: 2;
+}
+
+.book-author, .book-title{
+    flex: 1;
 }
 
 .book-card p{
