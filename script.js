@@ -86,7 +86,8 @@ const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
 
 
-addNewBookButton.addEventListener("click", () => dialog.showModal());
+addNewBookButton.addEventListener('click', () => {console.log('clicked'); dialog.showModal()});
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
