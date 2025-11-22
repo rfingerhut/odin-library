@@ -1,4 +1,6 @@
 const myLibrary = [];
+let total = myLibrary.length;
+let numBooksRead = 0;
 
 function Book(title, author, id){
     this.title = title;
@@ -8,8 +10,21 @@ function Book(title, author, id){
 }
 
 Book.prototype.toggleReadStatus = function(){
-    (this.isRead) ? this.isRead = false : this.isRead = true;
+    if(this.isRead){
+        this.isRead = false;
+        numBooksRead--;
+    } else{
+        this.isRead = true;
+        numBooksRead++;
+    }
+    updateProgressBar();
 };
+
+const booksRead = document.getElementById('num-books-read');
+
+function updateProgressBar(){
+    booksRead.textContent = `${numBooksRead}`;
+}
 
 const bookCardSection = document.getElementById('book-card-section');
 
@@ -29,6 +44,8 @@ function addBookToLibrary(title, author){
 function displayBook(book){
     const bookCard = document.createElement('div');
     bookCard.classList.add('book-card');
+    const bookInfoContainer = document.createElement('div');
+    bookInfoContainer.classList.add('book-info-container')
 
     const bookTitle = document.createElement('p');
     bookTitle.textContent = book.title;
@@ -38,22 +55,25 @@ function displayBook(book){
     bookAuthor.textContent = book.author;
     bookAuthor.classList.add('book-author');
 
-    const readStatus = document.createElement('p');
-    readStatus.textContent = book.isRead ? 'Read' : 'Unread';
-    readStatus.classList.add('read-status');
-
     const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
+    removeButton.textContent = 'x';
     removeButton.classList.add('remove-button');
 
+    bookInfoContainer.append(bookTitle, bookAuthor);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
+
     const isReadButton = document.createElement('button');
-    isReadButton.textContent = 'Read';
+    (book.isRead) ? isReadButton.textContent = 'Read' : isReadButton.textContent = 'Unread';
+    
     isReadButton.classList.add('is-read-button');
+    buttonContainer.appendChild(isReadButton);
 
     bookCard.id = book.id;
 
 
-    bookCard.append(bookTitle, bookAuthor, readStatus, removeButton, isReadButton);
+    bookCard.append(bookInfoContainer, removeButton, buttonContainer);
     bookCardSection.appendChild(bookCard);
 
 
@@ -61,6 +81,8 @@ function displayBook(book){
         // LOGIC
         const i = myLibrary.findIndex((el) => el.id == book.id)
         myLibrary.splice(i,1);
+        numBooksRead--;
+        updateProgressBar();
 
         // DOM
         displayLibrary();
@@ -70,9 +92,7 @@ function displayBook(book){
         // LOGIC
         book.toggleReadStatus();
 
-        // DOM
-        readStatus.textContent = (!book.isRead) ? 'Unread' : 'Read';
-        isReadButton.textContent = (!book.isRead) ? 'Read' : 'Unread';
+        isReadButton.textContent = (!book.isRead) ? 'Unread' : 'Read';
     })
 }
 
@@ -84,10 +104,10 @@ function displayLibrary(){
 const addNewBookButton = document.getElementById('add-new-book-btn');
 const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
+const closeButton = document.getElementById('close-button');
 
 
-addNewBookButton.addEventListener('click', () => {console.log('clicked'); dialog.showModal()});
-
+addNewBookButton.addEventListener('click', () => {dialog.showModal()});
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -99,6 +119,7 @@ form.addEventListener('submit', (e) => {
     form.reset();
 })
 
+closeButton.addEventListener('click', () => dialog.close());
 
 // On browser load
 displayLibrary();
