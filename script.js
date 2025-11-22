@@ -4,8 +4,14 @@ function Book(title, author, id){
     this.title = title;
     this.author = author;
     this.id = id;
+    this.isRead = false;
 }
 
+Book.prototype.toggleReadStatus = function(){
+    (this.isRead) ? this.isRead = false : this.isRead = true;
+};
+
+const bookCardSection = document.getElementById('book-card-section');
 
 function addBookToLibrary(title, author){
     //create a book based on arguments
@@ -20,37 +26,59 @@ function addBookToLibrary(title, author){
     displayBook(newBook);
 }
 
-const bookCardSection = document.getElementById('book-card-section');
-
 function displayBook(book){
     const bookCard = document.createElement('div');
-    const bookTitle = document.createElement('p');
-    const bookAuthor = document.createElement('p');
+    bookCard.classList.add('book-card');
 
+    const bookTitle = document.createElement('p');
     bookTitle.textContent = book.title;
+    bookTitle.classList.add('book-title');
+
+    const bookAuthor = document.createElement('p');
     bookAuthor.textContent = book.author;
+    bookAuthor.classList.add('book-author');
+
+    const readStatus = document.createElement('p');
+    readStatus.textContent = book.isRead ? 'Read' : 'Unread';
+    readStatus.classList.add('read-status');
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.classList.add('remove-button');
+
+    const isReadButton = document.createElement('button');
+    isReadButton.textContent = 'Read';
+    isReadButton.classList.add('is-read-button');
+
     bookCard.id = book.id;
 
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookAuthor);
+
+    bookCard.append(bookTitle, bookAuthor, readStatus, removeButton, isReadButton);
     bookCardSection.appendChild(bookCard);
+
+
+    removeButton.addEventListener('click', () => {        
+        // LOGIC
+        const i = myLibrary.findIndex((el) => el.id == book.id)
+        myLibrary.splice(i,1);
+
+        // DOM
+        displayLibrary();
+    });
+
+    isReadButton.addEventListener('click', () => {
+        // LOGIC
+        book.toggleReadStatus();
+
+        // DOM
+        readStatus.textContent = (!book.isRead) ? 'Unread' : 'Read';
+        isReadButton.textContent = (!book.isRead) ? 'Read' : 'Unread';
+    })
 }
 
 function displayLibrary(){
     bookCardSection.innerHTML = '';
-
-    myLibrary.forEach((el) => {
-        const bookCard = document.createElement('div');
-        const bookTitle = document.createElement('p');
-        const bookAuthor = document.createElement('p');
-
-        bookTitle.textContent = el.title;
-        bookAuthor.textContent = el.author;
-        bookCard.id = el.id;
-        bookCard.appendChild(bookTitle);
-        bookCard.appendChild(bookAuthor);
-        bookCardSection.appendChild(bookCard);
-    });
+    myLibrary.forEach(displayBook);
 }
 
 const addNewBookButton = document.getElementById('add-new-book-btn');
@@ -58,7 +86,8 @@ const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
 
 
-addNewBookButton.addEventListener("click", () => dialog.show());
+addNewBookButton.addEventListener('click', () => {console.log('clicked'); dialog.showModal()});
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
