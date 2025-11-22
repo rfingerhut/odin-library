@@ -176,8 +176,8 @@ label{
     margin: 0;
     padding: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-template-rows: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(200px, min-content));
     align-items: stretch;
     gap: 1rem;
     overflow-y: scroll;
@@ -204,9 +204,9 @@ label{
 .book-info-container{
     display: grid;
     grid-auto-flow: row;
-    row-gap: 0.25rem;
-    overflow-wrap: anywhere;
+    row-gap: 0.5rem;
     max-height: 7rem;
+    min-height: 3rem;
 }
 
 .book-author, .book-title{
@@ -215,16 +215,13 @@ label{
 }
 
 .book-title{
-    max-height: 5rem;
+    max-height: 6rem;
     overflow-y: auto;
 }
 
 .book-author{
     max-height: 2rem;
-    overflow-y: auto;
 }
-
-
 
 .book-card button:not(.remove-button){
     background-color: black;
