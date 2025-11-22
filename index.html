@@ -13,16 +13,17 @@
 <body>
     <div class="main-container">
         <div class="side-bar">
-            <button id="add-new-book-btn">Add New Book</button>
+            <button id="add-new-book-btn" class="button">Add New Book</button>
         </div>
         <div id="book-card-section"></div>
         <dialog>
+            <button id="close-button" class="close">x</button>
             <form class="form">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="book-title">
                 <label for="author">Author</label>
                 <input type="text" name="author" id="book-author">
-                <button id="submit-book">Submit</button>
+                <button id="submit-book" class="button">Submit</button>
             </form>
         </dialog>
     </div>

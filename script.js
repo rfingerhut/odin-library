@@ -84,10 +84,10 @@ function displayLibrary(){
 const addNewBookButton = document.getElementById('add-new-book-btn');
 const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
+const closeButton = document.getElementById('close-button');
 
 
-addNewBookButton.addEventListener('click', () => {console.log('clicked'); dialog.showModal()});
-
+addNewBookButton.addEventListener('click', () => {dialog.showModal()});
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -98,6 +98,8 @@ form.addEventListener('submit', (e) => {
     addBookToLibrary(title, author);
     form.reset();
 })
+
+closeButton.addEventListener('click', () => dialog.close());
 
 // On browser load
 displayLibrary();
