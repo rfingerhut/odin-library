@@ -21,6 +21,7 @@ Book.prototype.toggleReadStatus = function(){
 };
 
 const booksRead = document.getElementById('num-books-read');
+
 function updateProgressBar(){
     booksRead.textContent = `${numBooksRead}`;
 }
@@ -62,8 +63,10 @@ function displayBook(book){
 
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
+
     const isReadButton = document.createElement('button');
-    isReadButton.textContent = 'Unread';
+    (book.isRead) ? isReadButton.textContent = 'Read' : isReadButton.textContent = 'Unread';
+    
     isReadButton.classList.add('is-read-button');
     buttonContainer.appendChild(isReadButton);
 
@@ -78,6 +81,8 @@ function displayBook(book){
         // LOGIC
         const i = myLibrary.findIndex((el) => el.id == book.id)
         myLibrary.splice(i,1);
+        numBooksRead--;
+        updateProgressBar();
 
         // DOM
         displayLibrary();
