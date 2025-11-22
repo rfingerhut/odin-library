@@ -2,6 +2,12 @@
     font-family: 'Roboto';
 }
 
+body {
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
 p{
     padding: 0;
     margin: 0;
@@ -21,7 +27,7 @@ p{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0rem 1rem;
+    padding: 1rem;
 }
 
 
@@ -32,6 +38,9 @@ p{
     background-color: black;
     width: 100%;
     text-align: center;
+    padding: 0.5rem;
+    margin: 0;
+    margin-bottom: 3rem;
 }
 
 .progress{
@@ -117,7 +126,7 @@ input:focus{
 }
 
 .button{
-    border: none;
+    border: 2px solid gray;
     display: flex;
 
     margin: 1rem auto;
@@ -126,8 +135,8 @@ input:focus{
     align-items: center;
     cursor: pointer;
 
-    background-color: #3b82f6;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .button:hover{
@@ -163,12 +172,34 @@ label{
 }
 
 
-.book-card-section{
-    border: 1px solid black;
-        grid-area: 'grid-area';
-
+#book-card-section{
+    margin: 0;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
 }
 
 .book-card{
-    border: 1px solid red;
+    border: none;
+    border-left: 10px solid black;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    border-radius: 10px;
+    height: min-content;
+    padding: 2rem;
+}
+
+.book-card p{
+    margin-bottom: 0.5rem;
+}
+
+.book-card button{
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    min-width: 80px;
 }
