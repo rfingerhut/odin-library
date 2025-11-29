@@ -109,10 +109,11 @@ function displayBook(book){
 function updateProgressBar(){
     let readBooks = myLibrary.filter((book) => book.isRead == true).length;
     let total = myLibrary.length;
+    let percent;
     booksRead.textContent =  `${readBooks}`;   
     totalBooks.textContent = `/${total}`;
 
-    let percent = readBooks/total*100;
+    (total == 0 && readBooks == 0) ? percent = 0 : percent = readBooks/total*100;
 
     progressBarFill.style.width = `${percent}%`;
 }
