@@ -30,8 +30,6 @@ p{
     padding: 1rem;
 }
 
-
-
 .title{
     font-size: 4rem;
     color: white;
@@ -50,10 +48,6 @@ p{
     flex-direction: column;
     align-items: end;
 }
-/* 
-#fraction{
-    display: none;
-} */
 
 #progress-bar-border{
    border: 1px solid gray;
