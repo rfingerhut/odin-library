@@ -109,13 +109,14 @@ function updateProgressBar(){
     let readBooks = myLibrary.filter((book) => book.isRead == true).length;
     let total = myLibrary.length;
     booksRead.textContent =  `${readBooks}`;   
-    totalBooks.textContent = `${total}`;
+    totalBooks.textContent = `/${total}`;
 
 }
 
 function displayLibrary(){
     bookCardSection.innerHTML = '';
     myLibrary.forEach(displayBook);
+    updateProgressBar();
 }
 
 // On browser load
