@@ -159,6 +159,11 @@ input:focus{
     font-weight: 500;
 }
 
+.read-button{
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+}
+
 label{
     font-weight: 500;
     margin-bottom: 0.5rem;
