@@ -77,6 +77,7 @@ function displayBook(book){
     buttonContainer.classList.add('button-container');
 
     const isReadButton = document.createElement('button');
+    isReadButton.classList.add('read-button');
     (book.isRead) ? isReadButton.textContent = 'Read' : isReadButton.textContent = 'Unread';
     
     isReadButton.classList.add('is-read-button');
