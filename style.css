@@ -139,6 +139,7 @@ input{
     justify-content: center;
     align-self: start;
     align-items: center;
+    justify-self: center;
     cursor: pointer;
 
     background-color: white;
@@ -146,7 +147,11 @@ input{
     font-size: 1.2rem;
     font-weight: 500;
     margin: 0 1rem;
+    width: 50%;
+}
 
+.button, .read-button, .title{
+    border-radius: 4px;
 }
 
 .button:hover{
@@ -292,4 +297,10 @@ label{
 .remove-button:hover{
     opacity: 0.7;
     transition: opacity 0.3s ease;
+}
+
+#fraction{
+    font-size: 1rem;
+    color: gray;
+    font-weight: 800;
 }
