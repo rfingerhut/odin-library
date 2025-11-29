@@ -22,6 +22,8 @@ const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
 const closeButton = document.getElementById('close-button');
 
+const progressBarFill = document.getElementById('progress-bar-fill');
+
 addNewBookButton.addEventListener('click', () => {dialog.showModal()});
 
 form.addEventListener('submit', (e) => {
@@ -104,13 +106,15 @@ function displayBook(book){
     })
 }
 
-
 function updateProgressBar(){
     let readBooks = myLibrary.filter((book) => book.isRead == true).length;
     let total = myLibrary.length;
     booksRead.textContent =  `${readBooks}`;   
     totalBooks.textContent = `/${total}`;
 
+    let percent = readBooks/total*100;
+
+    progressBarFill.style.width = `${percent}%`;
 }
 
 function displayLibrary(){
