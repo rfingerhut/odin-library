@@ -1,6 +1,4 @@
 const myLibrary = [];
-let total = myLibrary.length;
-let numBooksRead = 0;
 
 function Book(title, author, id){
     this.title = title;
@@ -10,23 +8,33 @@ function Book(title, author, id){
 }
 
 Book.prototype.toggleReadStatus = function(){
-    if(this.isRead){
-        this.isRead = false;
-        numBooksRead--;
-    } else{
-        this.isRead = true;
-        numBooksRead++;
-    }
+    this.isRead = !this.isRead; 
     updateProgressBar();
 };
 
 const booksRead = document.getElementById('num-books-read');
-
-function updateProgressBar(){
-    booksRead.textContent = `${numBooksRead}`;
-}
+const totalBooks = document.getElementById('total-books');
+const addNewBookButton = document.getElementById('add-new-book-btn');
 
 const bookCardSection = document.getElementById('book-card-section');
+
+const dialog = document.querySelector("dialog");
+const form = document.querySelector('form');
+const closeButton = document.getElementById('close-button');
+
+addNewBookButton.addEventListener('click', () => {dialog.showModal()});
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('book-title').value;
+    const author = document.getElementById('book-author').value;
+
+    addBookToLibrary(title, author);
+    form.reset();
+})
+
+closeButton.addEventListener('click', () => dialog.close());
 
 function addBookToLibrary(title, author){
     //create a book based on arguments
@@ -36,6 +44,8 @@ function addBookToLibrary(title, author){
 
     //store new book object into the array
     myLibrary.push(newBook);
+    updateProgressBar();
+
 
     //update display after book has been added
     displayBook(newBook);
@@ -76,15 +86,13 @@ function displayBook(book){
     bookCard.append(bookInfoContainer, removeButton, buttonContainer);
     bookCardSection.appendChild(bookCard);
 
-
     removeButton.addEventListener('click', () => {        
         // LOGIC
         const i = myLibrary.findIndex((el) => el.id == book.id)
         myLibrary.splice(i,1);
-        numBooksRead--;
-        updateProgressBar();
 
         // DOM
+        updateProgressBar();
         displayLibrary();
     });
 
@@ -96,30 +104,19 @@ function displayBook(book){
     })
 }
 
+
+function updateProgressBar(){
+    let readBooks = myLibrary.filter((book) => book.isRead == true).length;
+    let total = myLibrary.length;
+    booksRead.textContent =  `${readBooks}`;   
+    totalBooks.textContent = `${total}`;
+
+}
+
 function displayLibrary(){
     bookCardSection.innerHTML = '';
     myLibrary.forEach(displayBook);
 }
-
-const addNewBookButton = document.getElementById('add-new-book-btn');
-const dialog = document.querySelector("dialog");
-const form = document.querySelector('form');
-const closeButton = document.getElementById('close-button');
-
-
-addNewBookButton.addEventListener('click', () => {dialog.showModal()});
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById('book-title').value;
-    const author = document.getElementById('book-author').value;
-
-    addBookToLibrary(title, author);
-    form.reset();
-})
-
-closeButton.addEventListener('click', () => dialog.close());
 
 // On browser load
 displayLibrary();
