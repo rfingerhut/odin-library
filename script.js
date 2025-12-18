@@ -1,16 +1,17 @@
-const myLibrary = [];
-
-function Book(title, author, id){
-    this.title = title;
-    this.author = author;
-    this.id = id;
-    this.isRead = false;
+class Book{
+    constructor(title, author, id){
+        this.title = title;
+        this.author = author;
+        this.id = id;
+        this.isRead = false;
+    }
+    toggleReadStatus(){
+        this.isRead = !this.isRead;
+        updateProgressBar();
+    }
 }
 
-Book.prototype.toggleReadStatus = function(){
-    this.isRead = !this.isRead; 
-    updateProgressBar();
-};
+const myLibrary = [];
 
 const booksRead = document.getElementById('num-books-read');
 const totalBooks = document.getElementById('total-books');
