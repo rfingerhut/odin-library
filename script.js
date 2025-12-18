@@ -114,7 +114,6 @@ function displayBook(book){
     removeButton.addEventListener('click', () => {        
         myLibrary.removeBook(book.id);
 
-        updateProgressBar();
         displayLibrary();
     });
 
