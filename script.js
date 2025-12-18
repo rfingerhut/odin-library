@@ -1,3 +1,31 @@
+class Library{
+    constructor(){
+        this.books = [];
+    }
+
+    addBook(book) {
+        this.books.push(book);
+    }
+
+    removeBook(id){
+        const index = this.books.findIndex(book => book.id === id);
+        if (index !== -1){
+            this.books.splice(index, 1);
+        }
+    }
+
+    getReadCount(){
+        return this.books.filter(book => book.isRead).length;
+    }
+
+    toggleReadStatus(id){
+        const book = this.books.find(book => book.id === id);
+        if (book){
+            book.toggleReadStatus();
+        }
+    }
+}
+
 class Book{
     constructor(title, author, id){
         this.title = title;
@@ -11,7 +39,7 @@ class Book{
     }
 }
 
-const myLibrary = [];
+const myLibrary = new Library();
 
 const booksRead = document.getElementById('num-books-read');
 const totalBooks = document.getElementById('total-books');
@@ -40,17 +68,11 @@ form.addEventListener('submit', (e) => {
 closeButton.addEventListener('click', () => dialog.close());
 
 function addBookToLibrary(title, author){
-    //create a book based on arguments
     let uuid = crypto.randomUUID();
-
     const newBook = new Book(title, author, uuid);
+    myLibrary.addBook(newBook);
 
-    //store new book object into the array
-    myLibrary.push(newBook);
     updateProgressBar();
-
-
-    //update display after book has been added
     displayBook(newBook);
 }
 
@@ -91,26 +113,22 @@ function displayBook(book){
     bookCardSection.appendChild(bookCard);
 
     removeButton.addEventListener('click', () => {        
-        // LOGIC
-        const i = myLibrary.findIndex((el) => el.id == book.id)
-        myLibrary.splice(i,1);
+        myLibrary.removeBook(book.id);
 
-        // DOM
         updateProgressBar();
         displayLibrary();
     });
 
     isReadButton.addEventListener('click', () => {
-        // LOGIC
-        book.toggleReadStatus();
+        myLibrary.toggleReadStatus(book.id);
 
         isReadButton.textContent = (!book.isRead) ? 'Unread' : 'Read';
     })
 }
 
 function updateProgressBar(){
-    let readBooks = myLibrary.filter((book) => book.isRead == true).length;
-    let total = myLibrary.length;
+    let readBooks = myLibrary.getReadCount();
+    let total = myLibrary.books.length;
     let percent;
     booksRead.textContent =  `${readBooks}`;   
     totalBooks.textContent = `/${total}`;
@@ -122,9 +140,8 @@ function updateProgressBar(){
 
 function displayLibrary(){
     bookCardSection.innerHTML = '';
-    myLibrary.forEach(displayBook);
+    myLibrary.books.forEach(displayBook);
     updateProgressBar();
 }
 
-// On browser load
 displayLibrary();
