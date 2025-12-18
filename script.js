@@ -35,7 +35,6 @@ class Book{
     }
     toggleReadStatus(){
         this.isRead = !this.isRead;
-        updateProgressBar();
     }
 }
 
@@ -123,6 +122,7 @@ function displayBook(book){
         myLibrary.toggleReadStatus(book.id);
 
         isReadButton.textContent = (!book.isRead) ? 'Unread' : 'Read';
+        updateProgressBar();
     })
 }
 
