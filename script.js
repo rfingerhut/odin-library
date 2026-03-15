@@ -49,16 +49,33 @@ const bookCardSection = document.getElementById('book-card-section');
 const dialog = document.querySelector("dialog");
 const form = document.querySelector('form');
 const closeButton = document.getElementById('close-button');
+const submitButton = document.getElementById('submit-book');
 
 const progressBarFill = document.getElementById('progress-bar-fill');
 
 addNewBookButton.addEventListener('click', () => {dialog.showModal()});
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
+const titleInput = document.getElementById('book-title');
+const authorInput = document.getElementById('book-author');
+
+submitButton.addEventListener('click', (e) => {
 
     const title = document.getElementById('book-title').value;
     const author = document.getElementById('book-author').value;
+
+    if(title.length === 0){
+        titleInput.setCustomValidity('Please enter a title.');
+        return;
+    } else {
+        titleInput.setCustomValidity('');
+    }
+
+    if(author.length === 0){
+        authorInput.setCustomValidity('Please enter an author.');
+        return;
+    } else {
+        authorInput.setCustomValidity('');
+    }
 
     addBookToLibrary(title, author);
     form.reset();
